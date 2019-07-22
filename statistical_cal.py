@@ -1,4 +1,5 @@
-choice = 0
+import pandas as pd
+
 def menu():
     print("1. #age [Age in years]: ")
     print("2. #sex [1 = male; 0 = female]: ")
@@ -15,9 +16,53 @@ def menu():
     print("13. #thal [3= normal; 6 = fixed defect; 7 = reversable defect]: ")
     print("14. #target [1 or 0]: ")
 
-def average(choice):
-    print("Średnia dla wybranej kolumny ")
-    print(choice)
+def import_data(choice,name_of_column):
+    data_csv = pd.read_csv('heart.csv')
+    if (choice==1):
+        name_of_column = 'age'
+    elif (choice==2):
+        name_of_column = 'sex'
+    elif (choice==3):
+        name_of_column = 'cp'
+    elif (choice==4):
+        name_of_column = 'trestbps'
+    elif (choice==5):
+        name_of_column = 'chol'
+    elif (choice==6):
+        name_of_column = 'fbs'
+    elif (choice==7):
+        name_of_column = 'restecg'
+    elif (choice==8):
+        name_of_column = 'thalach'
+    elif (choice==9):
+        name_of_column = 'exang'
+    elif (choice==10):
+        name_of_column = 'oldpeak'
+    elif (choice==11):
+        name_of_column = 'slope'
+    elif (choice==12):
+        name_of_column = 'ca'
+    elif (choice==13):
+        name_of_column = 'thal'
+    elif (choice==14):
+        name_of_column = 'target'
+    else:
+        print('error')
+    data = data_csv[name_of_column]
+    return data
+
+def average(data, choice, name_of_column):
+    x = import_data(choice, name_of_column)
+    print("Średnia dla wybranej kolumny")
+    i = 0
+    sum = 0
+    for age in x:
+        number = int(x[i])
+        sum = sum + number
+        i = i + 1
+    average_result = round(sum/i, 3)
+    print(average_result)
+    return average_result
 
 def median(choice):
     print("Mediana dla wybranej kolumny ")
